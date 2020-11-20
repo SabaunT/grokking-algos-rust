@@ -8,7 +8,7 @@
 // todo AddAssign for nums
 // todo type aliases to make it easy to read
 /// Important: src should be sorted.
-pub(super) fn binary_search(element: u32, src: &[u32]) -> Option<usize> {
+pub(super) fn binary_search(src: &[u32], element: u32) -> Option<usize> {
     if src.is_empty() {
         return None;
     }
@@ -41,5 +41,5 @@ pub(super) fn binary_search(element: u32, src: &[u32]) -> Option<usize> {
 #[test]
 fn test_bin_search() {
     let src = (0..101).collect::<Vec<_>>();
-    assert_eq!(Some(50), binary_search(50, &src));
+    assert_eq!(Some(50), binary_search(&src, 50));
 }
