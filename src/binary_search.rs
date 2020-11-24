@@ -12,14 +12,14 @@ pub(super) fn binary_search(src: &[u32], element: u32) -> Option<usize> {
     if src.is_empty() {
         return None;
     }
-    
+
     // index of the lowest and highest elements of the `src`.
     // such indexing helps us recognizing search area without actually mutating `src`.
     let mut low = 0;
     let mut high = src.len() - 1;
-    
+
     // until search area is at least 1 element
-    while low != high { 
+    while low != high {
         let mid = (low + high / 2) as usize;
         let guess = src[mid];
 
