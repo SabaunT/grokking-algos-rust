@@ -5,10 +5,8 @@
 //! elements in array. After first search step, in case we weren't so luck to find an element on
 //! the first step, we through away 120_000 possible variants (new search is 240_000 - 120_000).
 
-// todo AddAssign for nums
-// todo type aliases to make it easy to read
 /// Important: src should be sorted.
-pub(super) fn binary_search(src: &[u32], element: u32) -> Option<usize> {
+pub(super) fn binary_search<T: Ord>(src: &[T], element: T) -> Option<usize> {
     if src.is_empty() {
         return None;
     }
@@ -21,17 +19,17 @@ pub(super) fn binary_search(src: &[u32], element: u32) -> Option<usize> {
     // until search area is at least 1 element
     while low != high {
         let mid = (low + high / 2) as usize;
-        let guess = src[mid];
+        let guess = &src[mid];
 
-        if guess > element {
+        if guess > &element {
             high = mid - 1;
         }
 
-        if guess < element {
+        if guess < &element {
             low = mid + 1;
         }
 
-        if guess == element {
+        if guess == &element {
             return Some(mid);
         }
     }
