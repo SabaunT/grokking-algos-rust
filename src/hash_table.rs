@@ -146,10 +146,10 @@ mod buckets {
         }
 
         pub(super) fn resize(&mut self, cap: usize) {
-            let mut new_bucket = Vec::with_capacity(cap);
-            new_bucket.resize_with(cap, || Vec::new());
+            let mut new_buckets = Vec::with_capacity(cap);
+            new_buckets.resize_with(cap, || Vec::new());
 
-            let old_buckets = replace(&mut self.0, new_bucket);
+            let old_buckets = replace(&mut self.0, new_buckets);
             self.update_old_values(old_buckets);
         }
 
