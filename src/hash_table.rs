@@ -2,7 +2,8 @@
 //!
 //! An idea is very simple. We put values in the array, but not just by pushing them. We have some smart algorithm for pushing,
 //! which requires having a way to compute the position of inserting value. The "way" is actually a hash function. Look at `HashTable::eval_index` method.
-//! todo обозначь про контракт между cap и len
+//! There is a crucial contract in current implementation: size and capacity of buckets container are equal, however the "real length", which is amount
+//! of initialized (more preciously, non-zero or non-empty in our case) values differs from capacity.
 
 use std::hash::{Hash, Hasher};
 
@@ -60,7 +61,6 @@ impl<K: Hash + Eq, V> HashTable<K, V> {
     // capacity n * 2? That's because indexing depends on the size of bucket vector,
     // so previous indexes become invalid.
     fn resize(&mut self) {
-        // todo занеси в evernote. Намного лучше, чем cap = abssd(); if cap == 0 и блабла
         let cap = match self.buckets.cap() {
             // "0" case will be called on the first insert
             0 => INITIAL_LEN,
@@ -95,7 +95,7 @@ mod buckets {
             let i = self.get_index(&key);
             // Deleting if entry exists by finding its index in `self.0[i]` bucket and returning value
             if let Some(pos) = self.get_pos_in_bucket(i, key) {
-                let (_, v) = self.0[i].swap_remove(pos); // todo swap remove хорош, когда все равно на порядок внутри
+                let (_, v) = self.0[i].swap_remove(pos);
                 return Some(v);
             }
             None
