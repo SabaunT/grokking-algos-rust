@@ -5,7 +5,7 @@
 //! There is a crucial contract in current implementation: size and capacity of buckets container are equal, however the "real length", which is amount
 //! of initialized (more preciously, non-zero or non-empty in our case) values differs from capacity.
 
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
 
 use buckets::Buckets;
 

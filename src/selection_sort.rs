@@ -1,4 +1,4 @@
-//! Choice sort
+//! Selection sort
 //!
 //! Has O(n^2). Very dumb.
 

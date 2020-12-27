@@ -17,7 +17,7 @@ pub(super) fn binary_search<T: Ord>(src: &[T], element: T) -> Option<usize> {
     let mut high = src.len() - 1;
 
     // until search area is at least 1 element
-    while low != high {
+    while low <= high {
         let mid = (low + high / 2) as usize;
         let guess = &src[mid];
 
